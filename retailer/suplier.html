@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplier Price Submission</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Supplier Portal</h1>
+      <p>Submit or update your product prices</p>
+    </header>
+
+    <div class="container">
+      <h2>Product Price Form</h2>
+      <form id="priceForm">
+        <label for="supplierName">Supplier Name</label>
+        <input type="text" id="supplierName" name="supplierName" required />
+
+        <label for="product">Product</label>
+        <input type="text" id="product" name="product" required />
+
+        <label for="price">Price (Ksh)</label>
+        <input type="number" id="price" name="price" required />
+
+        <button type="submit">Submit Price</button>
+      </form>
+
+      <div id="confirmationMessage" style="margin-top: 1rem; display: none">
+        <p style="color: #06361a">Price submitted successfully!</p>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("priceForm");
+      const confirmation = document.getElementById("confirmationMessage");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const supplierName = document.getElementById("supplierName").value;
+        const product = document.getElementById("product").value;
+        const price = document.getElementById("price").value;
+
+        // Saving the data to localStorage
+        const newEntry = {
+          supplier: supplierName,
+          product: product,
+          price: price,
+          timestamp: new Date().toISOString(),
+        };
+
+        let prices = JSON.parse(localStorage.getItem("prices") || "[]");
+        prices.push(newEntry);
+        localStorage.setItem("prices", JSON.stringify(prices));
+
+        // Reset form after submission
+        form.reset();
+        confirmation.style.display = "block";
+        setTimeout(() => (confirmation.style.display = "none"), 3000);
+      });
+    </script>
+  </body>
+</html>
