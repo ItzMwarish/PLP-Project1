@@ -32,7 +32,7 @@ Build a tool that helps shopkeepers:
 
 1. **Clone the repository:**
    ```
-   git clone https://github.com/your-username/PLP-Project1.git
+   git clone https://github.com/ItzMwarish/PLP-Project1.git
    ```
 2. **Navigate to the project directory:**
    ```
